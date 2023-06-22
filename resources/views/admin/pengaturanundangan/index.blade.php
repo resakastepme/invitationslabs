@@ -34,15 +34,32 @@
                         </div>
                         <div class="card-body">
 
-                            <label for=""> Nama Domain/URL Undangan </label>
-                            <div class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">undangan.digitalgathering.com/</span>
-                                    <input type="text" class="form-control" placeholder="akudandia"
-                                        onkeyup="nospaces(this)">
+                            <form action="{{ url('admin/pengaturan-undangan/simpanDomain') }}" method="POST">
+                                @csrf
+
+                                <label for=""> Nama Domain/URL Undangan </label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">undangan.invitationlabs.com/</span>
+                                        <input type="text" class="form-control" name="domain" placeholder="akudandia"
+                                            onkeyup="nospaces(this)" <?php
+                                            if (!$orders->domain == '') {
+                                                echo 'value="' . $orders->domain . '"';
+                                            }
+                                            ?>>
+                                    </div>
                                 </div>
-                            </div>
-                            <button class="btn btn-primary"> Simpan </button>
+
+                                @if (session('domain.nothingchange'))
+                                    <div class="alert alert-danger">{{ session('domain.nothingchange') }}</div>
+                                @elseif (session('domain.empty'))
+                                    <div class="alert alert-danger">{{ session('domain.empty') }}</div>
+                                @elseif (session('domain.changedsuccessfully'))
+                                    <div class="alert alert-success">{{ session('domain.changedsuccessfully') }}</div>
+                                @endif
+
+                                <button class="btn btn-primary" type="submit"> Simpan </button>
+                            </form>
 
                             <hr>
 
@@ -88,26 +105,46 @@
                         </div>
                     </div>
 
-                    <div class="card">
+                    <div class="card" id="salam-pembuka">
                         <div class="card-header">
                             <h6 class="font-weight-bold text-primary"> Salam Pembuka </h6>
                         </div>
                         <div class="card-body">
 
-                            <label>Salam Pembuka Undangan</label>
+                            <form action="{{ url('/admin/pengaturan-undangan/salamPembukaSubmit') }}" method="POST">
+                                @csrf
 
-                            <textarea type="text" rows="4" class="form-control mb-3" placeholder="Salam Pembuka Undangan"
-                                style="max-height: 500px">Test</textarea>
+                                <label>Salam Pembuka Undangan</label>
 
-                            <label>Salam Pembuka Whatsapp (Atas)</label>
-                            <textarea type="text" rows="4" class="form-control mb-3" placeholder="Salam Pembuka Undangan"
-                                style="max-height: 500px">Test</textarea>
+                                <textarea type="text" rows="4" class="form-control mb-3" placeholder="Salam Pembuka Undangan"
+                                    style="max-height: 500px" name="salam_pembuka">
+@if (!$datas->salam_pembuka == '')
+{{ $datas->salam_pembuka }}
+@endif
+</textarea>
 
-                            <label>Salam Pembuka Undangan</label>
-                            <textarea type="text" rows="4" class="form-control mb-4" placeholder="Salam Pembuka Undangan"
-                                style="max-height: 500px">Test</textarea>
+                                <label>Salam Pembuka Whatsapp (Atas)</label>
+                                <textarea type="text" rows="4" class="form-control mb-3" placeholder="Salam Pembuka Undangan"
+                                    style="max-height: 500px" name="wa_atas">
+@if (!$datas->wa_atas == '')
+{{ $datas->wa_atas }}
+@endif
+</textarea>
 
-                            <button class="btn btn-primary"> Simpan </button>
+                                <label>Salam Pembuka Whatsapp (Bawah)</label>
+                                <textarea type="text" rows="4" class="form-control mb-4" placeholder="Salam Pembuka Undangan"
+                                    style="max-height: 500px" name="wa_bawah">
+@if (!$datas->wa_bawah == '')
+{{ $datas->wa_bawah }}
+@endif
+</textarea>
+
+                                @if (session('greetings.successfully'))
+                                    <div class="alert alert-success">{{ session('greetings.successfully') }}</div>
+                                @endif
+
+                                <button type="submit" class="btn btn-primary"> Simpan </button>
+                            </form>
 
                         </div>
                     </div>

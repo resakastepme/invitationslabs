@@ -39,8 +39,12 @@ Route::get('/admin', function (){
 });
 Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('tampilan', TampilanController::class);
+    Route::get('/tampilan/change/{id}', [TampilanController::class, 'changeTampilan']);
     Route::resource('pengaturan-undangan', PengaturanUndanganController::class);
+    Route::post('/pengaturan-undangan/simpanDomain', [PengaturanUndanganController::class, 'simpanDomain']);
+    Route::post('/pengaturan-undangan/salamPembukaSubmit', [PengaturanUndanganController::class, 'salamPembukaSubmit']);
     Route::resource('mempelai', MempelaiController::class);
+    Route::post('/mempelai/upPria', [MempelaiController::class, 'upPria'])->name('mempelai.upPria');
     Route::resource('acara', AcaraController::class);
     Route::resource('gallery', GalleryController::class);
     Route::resource('cerita', CeritaController::class);

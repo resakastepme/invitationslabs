@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mempelai;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MempelaiController extends Controller
 {
@@ -18,6 +19,23 @@ class MempelaiController extends Controller
         return view('admin.mempelai.index', [
             'link' => $FULL
         ]);
+    }
+
+    public function upPria(Request $request)
+    {
+        $image = $request->image;
+
+        list($type, $image) = explode(';', $image);
+        list(, $image)      = explode(',', $image);
+
+        $image = base64_decode($image);
+        $image_name= time().'.png';
+        // $path = public_path('storage/users/'.md5(Auth::user()->name).'/img/'.$image_name);
+        $path = public_path('storage/images_test/'. $image_name);
+
+        file_put_contents($path, $image);
+
+        return response()->json(['status'=>true]);
     }
 
     /**

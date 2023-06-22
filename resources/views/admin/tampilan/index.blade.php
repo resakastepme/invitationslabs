@@ -13,6 +13,7 @@
                     <li class="breadcrumb-item active">Dashboard v1</li>
                 </ol>
             </div><!-- /.col --> --}}
+
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
@@ -24,81 +25,34 @@
             <!-- Small boxes (Stat box) -->
             <div class="row">
 
-                <div class="col-lg-3 col-md-6 col-xs-12 mt-5">
-                    <div class="card" align="center">
-                        <div class="card-header">
-                            <img src="{{ asset('dist/img/user2-160x160.jpg') }}"
-                                style="object-fit: cover; position: relative; max-height: 500px;">
-                        </div>
-                        <div class="card-body">
-                            <h1> JUDUL </h1>
-                        </div>
-                        <div class="card-footer">
-                            <button class="btn btn-success"> Pilih </button>
-                            <button class="btn btn-secondary"> Demo </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-xs-12 mt-5">
-                    <div class="card" align="center">
-                        <div class="card-header">
-                            <img src="{{ asset('dist/img/user2-160x160.jpg') }}"
-                                style="object-fit: cover; position: relative; max-height: 500px;">
-                        </div>
-                        <div class="card-body">
-                            <h1> JUDUL </h1>
-                        </div>
-                        <div class="card-footer">
-                            <button class="btn btn-success"> Pilih </button>
-                            <button class="btn btn-secondary"> Demo </button>
+                @if (session('changed.succcessfully'))
+                <div class="alert alert-success">{{ session('changed.succcessfully') }}</div>
+            @endif
+
+                @foreach ($temas as $row)
+                    <div class="col-lg-3 col-md-6 col-xs-12 mt-5">
+                        <div class="card" align="center">
+                            <div class="card-header">
+                                <img src="{{ asset('themes/'.$row->nama_tema.'/preview.png') }}"
+                                    style="object-fit: cover; position: relative; height:10%; width:90%; max-height: 350px;">
+                            </div>
+                            <div class="card-body">
+                                <h1> {{ $row->nama_tema }} </h1>
+                            </div>
+                            <div class="card-footer">
+
+                                @if ($orders->id_tema == $row->id)
+                                <button class="btn btn-success" disabled> Aktif </button>
+                                @else
+                                <a href="{{ url('/admin/tampilan/change/'.$row->id) }}" class="btn btn-success"> Pilih </a>
+                                @endif
+
+                                <button class="btn btn-secondary"> Demo </button>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-xs-12 mt-5">
-                    <div class="card" align="center">
-                        <div class="card-header">
-                            <img src="{{ asset('dist/img/user2-160x160.jpg') }}"
-                                style="object-fit: cover; position: relative; max-height: 500px;">
-                        </div>
-                        <div class="card-body">
-                            <h1> JUDUL </h1>
-                        </div>
-                        <div class="card-footer">
-                            <button class="btn btn-success"> Pilih </button>
-                            <button class="btn btn-secondary"> Demo </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-xs-12 mt-5">
-                    <div class="card" align="center">
-                        <div class="card-header">
-                            <img src="{{ asset('dist/img/user2-160x160.jpg') }}"
-                                style="object-fit: cover; position: relative; max-height: 500px;">
-                        </div>
-                        <div class="card-body">
-                            <h1> JUDUL </h1>
-                        </div>
-                        <div class="card-footer">
-                            <button class="btn btn-success"> Pilih </button>
-                            <button class="btn btn-secondary"> Demo </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-xs-12 mt-5">
-                    <div class="card" align="center">
-                        <div class="card-header">
-                            <img src="{{ asset('dist/img/user2-160x160.jpg') }}"
-                                style="object-fit: cover; position: relative; max-height: 500px;">
-                        </div>
-                        <div class="card-body">
-                            <h1> JUDUL </h1>
-                        </div>
-                        <div class="card-footer">
-                            <button class="btn btn-success"> Pilih </button>
-                            <button class="btn btn-secondary"> Demo </button>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
+
             </div>
         </div>
 

@@ -1,10 +1,13 @@
 <?php
 
 if (time() - session('attempt') > 3600) {
-        session()->pull('attempt');
-        Auth::logout();
-        return redirect()->to('/login')->with('sesihabis', 'Session habis, Silahkan login lagi!')->send();
-    }
+    session()->pull('attempt');
+    Auth::logout();
+    return redirect()
+        ->to('/login')
+        ->with('sesihabis', 'Session habis, Silahkan login lagi!')
+        ->send();
+}
 
 ?>
 
@@ -17,7 +20,7 @@ if (time() - session('attempt') > 3600) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>AdminLTE 3 | Dashboard</title>
+    <title>Invitation Labs</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -28,7 +31,7 @@ if (time() - session('attempt') > 3600) {
     <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Tempusdominus Bootstrap 4 -->
     {{-- <link rel="stylesheet" --}}
-        {{-- href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}"> --}}
+    {{-- href="{{ asset('plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css') }}"> --}}
     <!-- iCheck -->
     <link rel="stylesheet" href="{{ asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css') }}">
     <!-- JQVMap -->
@@ -42,9 +45,12 @@ if (time() - session('attempt') > 3600) {
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
     {{-- bootstrap --}}
-    <link href="{{ asset('plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="{{ asset('plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     {{-- drozone --}}
-<link rel="stylesheet" href="{{ asset('plugins/dropzone/min/dropzone.min.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('plugins/dropzone/min/dropzone.min.css') }}" type="text/css" />
+    {{-- croppie --}}
+    <link rel="stylesheet" href="{{ asset('base/css/croppie.min.css') }}" type="text/css" />
 
 </head>
 
@@ -82,8 +88,8 @@ if (time() - session('attempt') > 3600) {
 
                 {{-- <div class="user-panel d-flex"> --}}
                 <div class="image">
-                    <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image"
-                        style="max-width: 30px">
+                    <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
+                        alt="User Image" style="max-width: 30px">
                 </div>
                 <div class="info">
                     <p class="ml-2 d-none d-lg-inline"> {{ Auth::user()->email }} </p>
@@ -144,7 +150,8 @@ if (time() - session('attempt') > 3600) {
 
                         <li class="nav-header">FITUR</li>
 
-                        <li class="nav-item {{ Request::is('admin/tampilan') || Request::is('admin/pengaturan-undangan') || Request::is('admin/mempelai') || Request::is('admin/acara') || Request::is('admin/gallery') || Request::is('admin/cerita') || Request::is('admin/rekening') ? 'menu-open':'' }}">
+                        <li
+                            class="nav-item {{ Request::is('admin/tampilan') || Request::is('admin/pengaturan-undangan') || Request::is('admin/mempelai') || Request::is('admin/acara') || Request::is('admin/gallery') || Request::is('admin/cerita') || Request::is('admin/rekening') ? 'menu-open' : '' }}">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-solid fa-globe"></i>
                                 <p>
@@ -358,9 +365,13 @@ if (time() - session('attempt') > 3600) {
     <!-- Own Fontawesome -->
     <script src="{{ asset('plugins/fontawesome-free/d639410787.js') }}" crossorigin="anonymous"></script>
     {{-- bootstrap --}}
-    <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="{{ asset('plugins/bootstrap/js/bootstrap.bundle.min.js') }}"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+    </script>
     {{-- dropzone --}}
     <script src="{{ asset('plugins/dropzone/min/dropzone.min.js') }}"></script>
+    {{-- croppie --}}
+    <script src="{{ asset('base/js/croppie.min.js') }}"></script>
 
     <script type="text/javascript">
         $(document).ready(function() {

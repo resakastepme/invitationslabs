@@ -13,7 +13,7 @@
     <meta name="keywords" content="Undangan digital, Website pernikahan, Undangan kekinian, Web undangan keren">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="theme-color" content="#005CAA" />
-    <meta name="author" content="MC Project">
+    <meta name="author" content="Invitation Labs">
 
     <!-- Required CSS -->
     {{-- <link rel="stylesheet" href="<?php echo base_url(); ?>/assets/base/css/bootstrap.min.css?SIDOINIKAHV2" > --}}
