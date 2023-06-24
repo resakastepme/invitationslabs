@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Dashboard</h1>
+                    <h1 class="m-0">Data Ucapan</h1>
                 </div><!-- /.col -->
                 {{-- <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -30,7 +30,7 @@
                         <div class="inner">
                             <h3>150</h3>
 
-                            <p>Total Pengunjung</p>
+                            <p>Total Ucapan</p>
                         </div>
                         <div class="icon">
                             <i class="ion ion-android-people"></i>
@@ -44,10 +44,10 @@
                         <div class="inner">
                             <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-                            <p>Total Ucapan</p>
+                            <p>Total Ucapan Hari Ini</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-chatbubbles"></i>
+                            <i class="ion ion-android-people"></i>
                         </div>
                     </div>
                 </div>
@@ -57,30 +57,6 @@
             <div class="row">
                 <!-- Left col -->
                 <section class="col-lg-12 connectedSortable">
-
-                    <!-- AREA CHART -->
-                    <div class="card card-primary">
-                        <div class="card-header">
-                            <h3 class="card-title">Area Chart</h3>
-
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="chart">
-                                <canvas id="areaChart"
-                                    style="min-height: 250px; height: 250px; max-height: 250px; max-width: 100%;"></canvas>
-                            </div>
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                    <!-- /.card -->
 
                     <div class="card card-primary">
                         <div class="card-header">
@@ -174,59 +150,6 @@
 @endsection
 @section('script')
     <script type="text/javascript">
-        $(function() {
-
-            //--------------
-            //- AREA CHART -
-            //--------------
-
-            // Get context with jQuery - using jQuery's .get() method.
-            var areaChartCanvas = $('#areaChart').get(0).getContext('2d')
-
-            var areaChartData = {
-                labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-                datasets: [{
-                    label: 'Digital Goods',
-                    backgroundColor: 'rgba(60,141,188,0.9)',
-                    borderColor: 'rgba(60,141,188,0.8)',
-                    pointRadius: false,
-                    pointColor: '#3b8bba',
-                    pointStrokeColor: 'rgba(60,141,188,1)',
-                    pointHighlightFill: '#fff',
-                    pointHighlightStroke: 'rgba(60,141,188,1)',
-                    data: [1, 2, 3, 4, 5, 6, 7]
-                }]
-            }
-
-            var areaChartOptions = {
-                maintainAspectRatio: false,
-                responsive: true,
-                legend: {
-                    display: false
-                },
-                scales: {
-                    xAxes: [{
-                        gridLines: {
-                            display: false,
-                        }
-                    }],
-                    yAxes: [{
-                        gridLines: {
-                            display: false,
-                        }
-                    }]
-                }
-            }
-
-            // This will get the first returned node in the jQuery collection.
-            new Chart(areaChartCanvas, {
-                type: 'line',
-                data: areaChartData,
-                options: areaChartOptions
-            })
-
-        });
-
         function myFunction() {
             // Declare variables
             var input, filter, table, tr, td, i, txtValue;

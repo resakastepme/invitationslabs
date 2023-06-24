@@ -51,6 +51,8 @@ if (time() - session('attempt') > 3600) {
     <link rel="stylesheet" href="{{ asset('plugins/dropzone/min/dropzone.min.css') }}" type="text/css" />
     {{-- croppie --}}
     <link rel="stylesheet" href="{{ asset('base/css/croppie.min.css') }}" type="text/css" />
+    {{-- DataTables --}}
+    <link rel="stylesheet" href="{{ asset('plugins/bootstrap/css/dataTables.bootstrap5.min.css') }}" type="text/css" />
 
 </head>
 
@@ -205,7 +207,7 @@ if (time() - session('attempt') > 3600) {
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item {{ Request::is('admin/riwayat') || Request::is('admin/ucapan') ? 'menu-open' : '' }} ">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-solid fa-chart-line"></i>
                                 <p>
@@ -215,20 +217,20 @@ if (time() - session('attempt') > 3600) {
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="./index.html" class="nav-link">
+                                    <a href="{{ route('riwayat.index') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Riwayat</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="./index2.html" class="nav-link">
+                                    <a href="{{ route('ucapan.index') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Ucapan</p>
                                     </a>
                                 </li>
                             </ul>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item {{ Request::is('admin/tamu') || Request::is('admin/pengaturan-tamu') || Request::is('admin/hadir') ? 'menu-open' : '' }} ">
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-solid fa-book"></i>
                                 <p>
@@ -238,19 +240,19 @@ if (time() - session('attempt') > 3600) {
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="pages/charts/chartjs.html" class="nav-link">
+                                    <a href="{{ route('tamu.index') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Data Tamu</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/charts/flot.html" class="nav-link">
+                                    <a href=" {{ route('pengaturan-tamu.index') }} " class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Setting Buku Tamu</p>
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a href="pages/charts/inline.html" class="nav-link">
+                                    <a href="{{ route('hadir.index') }}" class="nav-link">
                                         <i class="far fa-circle nav-icon"></i>
                                         <p>Data Hadir</p>
                                     </a>
@@ -258,7 +260,7 @@ if (time() - session('attempt') > 3600) {
                             </ul>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/calendar.html" class="nav-link">
+                            <a href=" {{ route('testimonial.index') }} " class="nav-link">
                                 <i class="nav-icon far fa-solid fa-comments"></i>
                                 <p>
                                     Testimonial
@@ -267,7 +269,7 @@ if (time() - session('attempt') > 3600) {
                         </li>
                         <li class="nav-header">BANTUAN</li>
                         <li class="nav-item">
-                            <a href="pages/calendar.html" class="nav-link">
+                            <a href="https://api.whatsapp.com/send?phone=6289665983762" target="blank" class="nav-link">
                                 <i class="nav-icon fas fa-solid fa-info"></i>
                                 <p>
                                     Hubungi Kami
@@ -276,7 +278,7 @@ if (time() - session('attempt') > 3600) {
                         </li>
                         <li class="nav-header">AKUN</li>
                         <li class="nav-item">
-                            <a href="pages/calendar.html" class="nav-link">
+                            <a href="{{ route('pengaturan.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-solid fa-wrench"></i>
                                 <p>
                                     Pengaturan

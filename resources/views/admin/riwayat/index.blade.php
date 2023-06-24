@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Dashboard</h1>
+                    <h1 class="m-0">Data Riwayat</h1>
                 </div><!-- /.col -->
                 {{-- <div class="col-sm-6">
                 <ol class="breadcrumb float-sm-right">
@@ -44,10 +44,10 @@
                         <div class="inner">
                             <h3>53<sup style="font-size: 20px">%</sup></h3>
 
-                            <p>Total Ucapan</p>
+                            <p>Total Pengunjung Hari Ini</p>
                         </div>
                         <div class="icon">
-                            <i class="ion ion-chatbubbles"></i>
+                            <i class="ion ion-android-people"></i>
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                     <!-- AREA CHART -->
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Area Chart</h3>
+                            <h3 class="card-title">Pengunjung 7 hari terakhir</h3>
 
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -84,7 +84,7 @@
 
                     <div class="card card-primary">
                         <div class="card-header">
-                            <h3 class="card-title">Data Ucapan</h3>
+                            <h3 class="card-title">Data Pengunjung</h3>
 
                             <div class="card-tools">
                                 <button type="button" class="btn btn-tool" data-card-widget="collapse">
