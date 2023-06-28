@@ -13,6 +13,7 @@ use App\Http\Controllers\PengaturanTamuController;
 use App\Http\Controllers\PengaturanUndanganController;
 use App\Http\Controllers\RekeningController;
 use App\Http\Controllers\RiwayatController;
+use App\Http\Controllers\TagihanController;
 use App\Http\Controllers\TampilanController;
 use App\Http\Controllers\TamuController;
 use App\Http\Controllers\TestimonialController;
@@ -63,6 +64,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
     Route::resource('hadir', HadirController::class);
     Route::resource('testimonial', TestimonialController::class);
     Route::resource('pengaturan', PengaturanController::class);
+    Route::resource('tagihan', TagihanController::class);
 });
 
 // Demo

@@ -299,7 +299,7 @@
                 ?>
                 <div class="col-lg-3 col-md-6 col-xs-12 mt-5">
                     <div class="fdb-box p-0">
-                        <img alt="image" class="img-fluid rounded-0" src="">
+                        <img alt="image" class="img-fluid rounded-0" src="{{ asset('themes/'.$row->nama_tema.'/preview.png') }}">
 
                         <div class="content p-2 d-flex justify-content-center">
                             <h3><strong>{{ $row->nama_tema }}</strong></h3>

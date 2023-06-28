@@ -286,7 +286,7 @@ if (time() - session('attempt') > 3600) {
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/calendar.html" class="nav-link">
+                            <a href=" {{ route('tagihan.index') }} " class="nav-link">
                                 <i class="nav-icon fas fa-solid fa-money-bill"></i>
                                 <p>
                                     Tagihan
