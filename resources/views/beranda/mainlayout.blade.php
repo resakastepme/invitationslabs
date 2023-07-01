@@ -222,7 +222,7 @@
 
                             <p class="h1 mt-5 mb-5">Rp 100.000</p>
 
-                            <p><a href=" {{ url('/order/') }} " class="btn btn-primary">Pesan Sekarang</a></p>
+                            <p><a href=" {{ url('/order/basic') }} " class="btn btn-primary">Pesan Sekarang</a></p>
 
                             <hr>
 
@@ -254,7 +254,7 @@
 
                             <p class="h1 mt-5 mb-5">Rp 180.000</p>
 
-                            <p><a href=" {{ url('/order/') }} " class="btn btn-primary">Pesan Sekarang</a></p>
+                            <p><a href=" {{ url('/order/new') }} " class="btn btn-primary">Pesan Sekarang</a></p>
 
                             <hr>
 
@@ -306,9 +306,9 @@
                         </div>
 
                         <div class="d-flex justify-content-center">
-                            <p class="mt-2 mr-2"><a href="">Pesan</a></p>
-                            <p class="mt-2"><a href="{{ url('/demo/' . $row->kode_tema) }}">Demo</a></p>
-                        </div>
+                            <p class="mt-2 mr-2"><a href="{{ url('/tema/kode/'. $row->kode_tema) }}" class="btn btn-success btn-sm">Pesan</a></p>
+                            <p class="mt-2"><a href="{{ route('undangan.demo', $row->kode_tema) }}" class="btn btn-primary btn-sm" target="blank">Demo</a></p>
+                          </div>
                     </div>
                 </div>
                 <?php
@@ -318,7 +318,7 @@
             </div>
 
             <div class="d-flex justify-content-center">
-                <p class="mt-4"><a href="" class="btn btn-primary">Lihat Semua</a></p>
+                <p class="mt-4"><a href="{{ url('/tema') }}" class="btn btn-primary">Lihat Semua</a></p>
             </div>
 
         </div>
@@ -422,7 +422,7 @@
                 <div class="col">
                     <p class="text-footer" style="color:#fff;">&#169;2023 <a href="https://www.invitationlabs.com/"
                             rel="dofollow" target="_blank"> {{ env('APP_NAME') }} </a> - <a
-                            href="https://www.invitationlabs.com/" rel="dofollow" target="_blank">MC Project</a> .
+                            href="https://www.invitationlabs.com/" rel="dofollow" target="_blank"> Invitation Labs </a> .
                     </p>
                 </div>
             </div>

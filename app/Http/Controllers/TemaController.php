@@ -2,26 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Beranda;
 use App\Models\Tema;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
-class BerandaController extends Controller
+class TemaController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-
-        // $dbtema = Tema::where('nama_tema', 'NOT LIKE', 'demo')->get();
-        Session::pull('plan_order');
-        Session::pull('tema_order');
-        $dbtema = Tema::get();
-
-        return view('beranda.mainlayout', [
-            'dbtema' => $dbtema
+        $temas = Tema::get();
+        return view('beranda.tema.index', [
+            'temas' => $temas
         ]);
     }
 
@@ -44,7 +37,7 @@ class BerandaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Beranda $beranda)
+    public function show(string $id)
     {
         //
     }
@@ -52,7 +45,7 @@ class BerandaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Beranda $beranda)
+    public function edit(string $id)
     {
         //
     }
@@ -60,7 +53,7 @@ class BerandaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Beranda $beranda)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -68,7 +61,7 @@ class BerandaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Beranda $beranda)
+    public function destroy(string $id)
     {
         //
     }

@@ -3,16 +3,31 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Models\Tema;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($id)
     {
-        //
+        if( Session::has('tema_order') ){
+            $temas = Tema::where('kode_tema', $id)->first();
+            return view('beranda.plan.index', [
+                'temas' => $temas
+            ]);
+        }elseif( !Session::has('tema_order') ){
+
+            Session::put('plan_order', $id);
+            $temas = Tema::get();
+            return view('beranda.tema.index', [
+                'temas' => $temas
+            ]);
+
+        }
     }
 
     /**
@@ -20,7 +35,11 @@ class OrderController extends Controller
      */
     public function create()
     {
-        //
+        if(!Session::has('plan_order') && !Session::has('tema_order') ){
+            return redirect()->to('/');
+        }else{
+            return view('order.mainlayout');
+        }
     }
 
     /**

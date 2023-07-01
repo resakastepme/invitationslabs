@@ -8,6 +8,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HadirController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MempelaiController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PengaturanController;
 use App\Http\Controllers\PengaturanTamuController;
 use App\Http\Controllers\PengaturanUndanganController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\RiwayatController;
 use App\Http\Controllers\TagihanController;
 use App\Http\Controllers\TampilanController;
 use App\Http\Controllers\TamuController;
+use App\Http\Controllers\TemaController;
 use App\Http\Controllers\TestimonialController;
 use App\Http\Controllers\UcapanController;
 use Illuminate\Support\Facades\Route;
@@ -68,11 +70,41 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 });
 
 // Demo
-Route::get('/demo/{kode_tema}', [DemoController::class, 'index']);
+// Route::get('/demo/{kode_tema}', [DemoController::class, 'index']);     //NABRAK SUBDOMAIN
+
+// Order & Create New
+Route::get('/order/{id}', [OrderController::class, 'index']);
+Route::get('/new/order', [OrderController::class, 'create']);
+
+//Tema
+Route::get('/tema', [TemaController::class, 'index']);
+
+//Tema Redirect to plan
+Route::get('/tema/kode/{kode_tema}', function ($kode_tema) {
+    Session::put('tema_order', $kode_tema);
+    return redirect()->to('/order/'.$kode_tema);
+});
+
+//Plan Redirect to New Order
+Route::get('/plan/kode/{kode_plan}', function ($kode_plan) {
+    Session::put('plan_order', $kode_plan);
+    return redirect()->to('/new/order');
+});
+
+// Tema redirect to New Order
+Route::get('/temanew/kode/{kode_tema}', function ($kode_tema) {
+    Session::put('tema_order', $kode_tema);
+    return redirect()->to('/new/order');
+});
 
 //Logout
 Route::get('/logout', function () {
     session()->pull('attempt');
     Auth::logout();
     return redirect()->to('login');
+});
+
+//Dump
+Route::get('/dd', function () {
+    dd(session('tema_order'));
 });
