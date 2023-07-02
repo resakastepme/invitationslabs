@@ -74,7 +74,9 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 
 // Order & Create New
 Route::get('/order/{id}', [OrderController::class, 'index']);
-Route::get('/new/order', [OrderController::class, 'create']);
+Route::get('/new/order/1', [OrderController::class, 'create']);
+Route::post('/new/order/2', [OrderController::class, 'mempelai']);
+Route::post('/new/order/3', [OrderController::class, 'acara']);
 
 //Tema
 Route::get('/tema', [TemaController::class, 'index']);
@@ -88,13 +90,13 @@ Route::get('/tema/kode/{kode_tema}', function ($kode_tema) {
 //Plan Redirect to New Order
 Route::get('/plan/kode/{kode_plan}', function ($kode_plan) {
     Session::put('plan_order', $kode_plan);
-    return redirect()->to('/new/order');
+    return redirect()->to('/new/order/1');
 });
 
 // Tema redirect to New Order
 Route::get('/temanew/kode/{kode_tema}', function ($kode_tema) {
     Session::put('tema_order', $kode_tema);
-    return redirect()->to('/new/order');
+    return redirect()->to('/new/order/1');
 });
 
 //Logout

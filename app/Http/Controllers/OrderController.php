@@ -33,13 +33,29 @@ class OrderController extends Controller
     /**
      * Show the form for creating a new resource.
      */
+
+    // ORDER1-DATAUSER
     public function create()
     {
         if(!Session::has('plan_order') && !Session::has('tema_order') ){
             return redirect()->to('/');
         }else{
-            return view('order.mainlayout');
+            return view('order.order1-datauser');
         }
+    }
+
+    // ORDER2-Mempelai
+    public function mempelai(){
+
+        return view('order.order2-mempelai');
+
+    }
+
+    // ORDER3-ACARA
+    public function acara(){
+
+        return view('order.order3-acara');
+
     }
 
     /**
