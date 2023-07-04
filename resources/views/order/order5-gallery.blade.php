@@ -115,6 +115,11 @@
 @endsection
 @section('script')
     <script type="text/javascript">
+        // sleep time expects milliseconds
+        function sleep(time) {
+            return new Promise((resolve) => setTimeout(resolve, time));
+        }
+
         $("#skipGallery").on('change', function() {
             if ($(this).prop('checked')) {
                 $("#konten-gallery").hide();
@@ -148,7 +153,7 @@
                 } else {
                     // var aql = JSON.parse(response);
                     // var url_asset = "test/"+aql.dummy+"/album"+ aql.no +".png";
-                    // var asset = "{{ asset("+url_asset+") }}";
+                    // var asset = "{{ asset('+url_asset+') }}";
                     // $('.dz-preview').remove();
                     // $("#previewss").prepend("<div id=\"preview" + aql.no +
                     //     "\" class=\"file-row preview-uploads\"><div class=\"preview-uploads-img\"><span class=\"preview\"><img id=\"img3\" src=\""+asset+"\"  style=\"height: 100%;object-position: center;object-fit: cover;width: 100%;\" /></span></div><div class=\"preview-uploads-name\"><p class=\"name\" style=\"line-height: revert;font-size: 12px;\" data-dz-name>album" +
@@ -156,7 +161,13 @@
                     //     "</p><strong class=\"error text-danger\" style=\"line-height: revert;font-size: 12px;\"  ></strong><p class=\"size\" style=\"line-height: revert;font-size: 12px;\" >-</p></div><div  class=\"preview-uploads-delete\"><button id=\"" +
                     //     aql.no + "\" class=\"btn btn-danger delete btnhehe\">Hapus</button></div></div>"
                     //     );
-                    location.reload()
+
+                    // Usage!
+                    sleep(2000).then(() => {
+                        // Do something after the sleep!
+                        location.reload()
+                    });
+
                 }
                 $('#loading').hide();
             });
