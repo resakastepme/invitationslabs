@@ -81,6 +81,8 @@ Route::post('/new/order/4', [OrderController::class, 'cerita']);
 Route::post('/new/order/5', [OrderController::class, 'gallery']);
 Route::post('/new/order/fileUpload', [OrderController::class, 'fileUpload']);
 Route::post('/new/order/del', [OrderController::class, 'del']);
+Route::post('/new/order/finish', [OrderController::class, 'finish']);
+Route::post('/new/order/save', [OrderController::class, 'save']);
 
 //Tema
 Route::get('/tema', [TemaController::class, 'index']);

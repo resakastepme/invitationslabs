@@ -106,12 +106,23 @@ class OrderController extends Controller
     //DEL-GALLERY
     public function del(Request $request){
 
-        $id = $request->getPost('id');
+        $id = $_POST['id'];
         $generate = sha1('gwdangw');
         $file = 'test/'.$generate.'/album'.$id.'.png';
-        unlink($file);
+        unlink(public_path($file));
         echo json_encode("sukses");
 
+    }
+
+    //ORDER6-FINISH
+    public function finish(){
+        return view('order.order6-finish');
+    }
+
+    //ORDER7-SAVE
+    public function save(){
+        sleep(5);
+        return view('order.order7-success');
     }
 
     /**
