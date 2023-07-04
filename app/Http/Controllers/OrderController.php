@@ -6,6 +6,8 @@ use App\Models\Order;
 use App\Models\Tema;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 
 class OrderController extends Controller
 {
@@ -55,6 +57,60 @@ class OrderController extends Controller
     public function acara(){
 
         return view('order.order3-acara');
+
+    }
+
+    // ORDER4-CERITA
+    public function cerita(){
+
+        return view('order.order4-cerita');
+
+    }
+
+    // ORDER5-GALLERY
+    public function gallery(){
+
+        return view('order.order5-gallery');
+
+    }
+
+    // FILEUPLOAD-GALLERY
+    public function fileUpload(Request $request){
+
+        $avatar = $request->file('file');
+        $generate = sha1('gwdangw');
+        $path = 'test/'.$generate;
+
+        // return $avatar;
+
+        // folder e
+        if(!file_exists($path)){
+        	// mkdir('test/'.$generate, 0777,true);
+            // Storage::makeDirectory('test/'.$generate);
+            File::makeDirectory('test/'.$generate);
+        }
+
+        //generate dan cek nama file
+        for($i=1;$i<=10;$i++){
+        	$pathName = 'test/'.$generate.'/album'.$i.'.png';
+        	if(!file_exists($pathName)){
+        		$ok = array("no"=>$i,"dummy"=>$generate);
+        		$avatar->move(public_path('test/'.$generate),'album'.$i.'.png');
+        		echo json_encode($ok);
+        		break;
+        	}
+        }
+
+    }
+
+    //DEL-GALLERY
+    public function del(Request $request){
+
+        $id = $request->getPost('id');
+        $generate = sha1('gwdangw');
+        $file = 'test/'.$generate.'/album'.$id.'.png';
+        unlink($file);
+        echo json_encode("sukses");
 
     }
 

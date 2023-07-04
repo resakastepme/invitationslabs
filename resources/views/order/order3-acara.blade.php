@@ -29,13 +29,13 @@
                                     <label>Tanggal </label>
                                     <input name="datepicker" type="text" class="form-control" placeholder="Tanggal"
                                         id="datepicker" readonly="readonly"
-                                        style="cursor:pointer; background-color: #FFFFFF" value="" required>
+                                        style="cursor:pointer; background-color: #FFFFFF" value="">
                                     <input type="hidden" id="tanggal_akad" name="tanggal_akad" value="">
                                 </div>
                                 <div class="col-6">
                                     <label>Waktu / Jam</label>
                                     <input name="waktu_akad" type="text" class="form-control"
-                                        placeholder="Contoh : 10.00 Pagi" value="" required>
+                                        placeholder="Contoh : 10.00 Pagi" value="">
                                 </div>
                             </div>
 
@@ -43,14 +43,14 @@
                                 <div class="col">
                                     <label>Tempat / Lokasi</label>
                                     <input name="lokasi_akad" type="text" class="form-control"
-                                        placeholder="Contoh : Kediaman Mempelai Wanita " value="" required>
+                                        placeholder="Contoh : Kediaman Mempelai Wanita " value="">
                                 </div>
                             </div>
 
                             <div class="row align-items-center mt-3">
                                 <div class="col">
                                     <label>Alamat</label>
-                                    <textarea name="alamat_akad" type="text" class="form-control" placeholder="Contoh : JL. Ahmad Yani No.1" required></textarea>
+                                    <textarea name="alamat_akad" type="text" class="form-control" placeholder="Contoh : JL. Ahmad Yani No.1"></textarea>
                                 </div>
                             </div>
 
@@ -62,13 +62,13 @@
                                     <label>Tanggal </label>
                                     <input name="datepicker2" type="text" class="form-control" placeholder="Tanggal"
                                         id="datepicker2" readonly="readonly"
-                                        style="cursor:pointer; background-color: #FFFFFF" value="" required>
+                                        style="cursor:pointer; background-color: #FFFFFF" value="">
                                     <input type="hidden" id="tanggal_resepsi" name="tanggal_resepsi" value="">
                                 </div>
                                 <div class="col-6">
                                     <label>Waktu / Jam</label>
                                     <input name="waktu_resepsi" type="text" class="form-control"
-                                        placeholder="Contoh : 10.00 Pagi"value="" required>
+                                        placeholder="Contoh : 10.00 Pagi"value="">
                                 </div>
                             </div>
 
@@ -76,7 +76,7 @@
                                 <div class="col">
                                     <label>Tempat / Lokasi</label>
                                     <input name="lokasi_resepsi" type="text" class="form-control"
-                                        placeholder="Contoh : Kediaman Mempelai Wanita" value="" required>
+                                        placeholder="Contoh : Kediaman Mempelai Wanita" value="">
                                 </div>
                             </div>
 
@@ -94,11 +94,9 @@
                                         placeholder="Contoh : Kediaman Mempelai Wanita" value="">
                                     <div class="mt-1">
                                         <!-- Button trigger modal -->
-                                        <button type="button" class="btn btn-secondary form-control" data-bs-toggle="modal"
-                                            data-bs-target="#exampleModal">
-                                            <i class="fa-solid fa-circle-question"></i>
-                                            Cara menambahkan Maps
-                                        </button>
+                                        <a href="#" class="" onclick="function (e) {e.preventDefault()}" data-bs-toggle="modal"
+                                        data-bs-target="#exampleModal"><i class="fa-solid fa-circle-question"></i>
+                                        Cara menambahkan Maps</a>
                                     </div>
                                 </div>
                             </div>

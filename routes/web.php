@@ -77,6 +77,10 @@ Route::get('/order/{id}', [OrderController::class, 'index']);
 Route::get('/new/order/1', [OrderController::class, 'create']);
 Route::post('/new/order/2', [OrderController::class, 'mempelai']);
 Route::post('/new/order/3', [OrderController::class, 'acara']);
+Route::post('/new/order/4', [OrderController::class, 'cerita']);
+Route::post('/new/order/5', [OrderController::class, 'gallery']);
+Route::post('/new/order/fileUpload', [OrderController::class, 'fileUpload']);
+Route::post('/new/order/del', [OrderController::class, 'del']);
 
 //Tema
 Route::get('/tema', [TemaController::class, 'index']);

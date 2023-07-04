@@ -13,6 +13,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta name="theme-color" content="#6c5ce7" />
     <meta name="author" content="{{ env('APP_NAME') }}">
+    <meta name="csrf_token" content="{{ csrf_token() }}">
 
     <!-- Required CSS -->
     <link href="{{ asset('plugins/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet"
@@ -22,6 +23,8 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,600|Roboto" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('base/css/pikaday.css') }}">
     <link rel="stylesheet" href="{{ asset('base/css/croppie.min.css') }}" type="text/css" />
+    {{-- drozone --}}
+    <link rel="stylesheet" href="{{ asset('plugins/dropzone/min/dropzone.min.css') }}" type="text/css" />
 
 </head>
 
@@ -92,8 +95,8 @@
     <script src="{{ asset('plugins/dropzone/min/dropzone.min.js') }}"></script>
     {{-- croppie --}}
     <script src="{{ asset('base/js/croppie.min.js') }}"></script>
-        <!-- Own Fontawesome -->
-        <script src="{{ asset('plugins/fontawesome-free/d639410787.js') }}" crossorigin="anonymous"></script>
+    <!-- Own Fontawesome -->
+    <script src="{{ asset('plugins/fontawesome-free/d639410787.js') }}" crossorigin="anonymous"></script>
 
     @yield('script')
 
