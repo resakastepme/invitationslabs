@@ -82,7 +82,8 @@ Route::post('/new/order/5', [OrderController::class, 'gallery']);
 Route::post('/new/order/fileUpload', [OrderController::class, 'fileUpload']);
 Route::post('/new/order/del', [OrderController::class, 'del']);
 Route::post('/new/order/finish', [OrderController::class, 'finish']);
-Route::post('/new/order/save', [OrderController::class, 'save']);
+Route::get('/new/order/save', [OrderController::class, 'save']);
+Route::get('/new/order/checkpoint', [OrderController::class, 'checkpoint']);
 
 //Tema
 Route::get('/tema', [TemaController::class, 'index']);
@@ -115,4 +116,17 @@ Route::get('/logout', function () {
 //Dump
 Route::get('/dd', function () {
     dd(session('tema_order'));
+});
+
+//RESET SESSION CHECKPOINT
+Route::get('/reset', function () {
+    Session::pull('checkpoint');
+    if(Session('checkpoint')  == ''){
+        return 'checkpoint empty';
+    }else{
+        return Session('checkpoint').'fail';
+    }
+});
+Route::get('/checkpoint', function () {
+    return Session('checkpoint');
 });

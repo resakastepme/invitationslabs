@@ -22,15 +22,12 @@
                                     <div class="col">
                                         <div class="row">
                                             <div class="col">
+                                                <?php $kode = 23424243234 ?>
                                                 <a
-                                                    style="font-size: 14px;text-transform: uppercase;color: #2c3e50;">#<?= $kode ?></a>
+                                                    style="font-size: 14px;text-transform: uppercase;color: #2c3e50;">#{{ $kode }}</a>
                                             </div>
                                             <div class="col-auto">
-                                                <?php if($status == 2){ ?>
-                                                <a href="#" class="btn-success btn-sm">Lunas</a>
-                                                <?php }else{ ?>
                                                 <a href="#" class="btn-warning btn-sm">Belum Lunas</a>
-                                                <?php } ?>
                                             </div>
                                         </div>
                                     </div>
@@ -43,7 +40,7 @@
                                 <label>Nama Domain / URL Undangan</label>
                                 <div class="upload-area-bg" style="margin-top: 5px;text-align: center;">
                                     <a
-                                        style="font-size: 14px;text-transform: lowercase;color: #007bff;"><?= SITE_UNDANGAN ?>/<?= $domain ?></a>
+                                        style="font-size: 14px;text-transform: lowercase;color: #007bff;">undangan.invitationlabs.com/testdantest</a>
 
                                 </div>
                             </div>
@@ -53,32 +50,32 @@
                             <div class="col">
                                 <div class="row">
                                     <div class="col">
-                                        <a href="<?= SITE_UNDANGAN ?>/<?= $domain ?>" target="_blank"
+                                        <a href="undangan.invitationlabs.com/testdantest" target="_blank"
                                             class="btn btn-primary btn-order btn-block">Buka Website</a>
                                     </div>
-                                    <div class="col" <?php if ($status == 1) {
-                                        echo "style='display:none'";
-                                    } ?>>
+
+                                    <div class="col" style="display: show;">
+
                                         <?php $format =
                                             "Hallo min,
                                         saya mau aktifasi Undangan *" .
                                             $kode .
                                             "*.
                                         mohon infonya "; ?>
-                                        <a href="<?= base_url('user/dashboard') ?>" target="_blank"
+                                        <a href="{{ url('/admin') }}" target="_blank"
                                             class="btn btn-success btn-order btn-block">Dashboard</a>
+
                                     </div>
+
                                 </div>
                             </div>
                         </div>
 
                         <div class="form-check mt-4" style="text-align: center;">
-                            <label class="form-check-label" <?php if ($status == 1) {
-                                echo "style='display:none'";
-                            } ?>>
+                            <label class="form-check-label" style="display: show;">
                                 Untuk melakukan aktifasi silahkan login ke dashboard user atau menghubungi admin kami via <a
-                                    href="https://wa.me/+6282377823390/?text=<?php echo urlencode($format); ?>">Whtasapp</a> dengan
-                                menyertakan <strong>kode : <?= $kode ?></strong>.
+                                    href="https://wa.me/+6289665983762/?text=<?php echo urlencode($format); ?>">Whtasapp</a> dengan
+                                menyertakan <strong>kode : {{ $kode }}</strong>.
                             </label>
                         </div>
 

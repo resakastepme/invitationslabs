@@ -16,12 +16,12 @@ class OrderController extends Controller
      */
     public function index($id)
     {
-        if( Session::has('tema_order') ){
+        if (Session::has('tema_order')) {
             $temas = Tema::where('kode_tema', $id)->first();
             return view('beranda.plan.index', [
                 'temas' => $temas
             ]);
-        }elseif( !Session::has('tema_order') ){
+        } elseif (!Session::has('tema_order')) {
 
             Session::put('plan_order', $id);
             $temas = Tema::get();
@@ -39,90 +39,151 @@ class OrderController extends Controller
     // ORDER1-DATAUSER
     public function create()
     {
-        if(!Session::has('plan_order') && !Session::has('tema_order') ){
+        if (!Session::has('plan_order') && !Session::has('tema_order')) {
             return redirect()->to('/');
-        }else{
-            return view('order.order1-datauser');
+        } else {
+
+            $checkpoint = Session('checkpoint');
+            if($checkpoint == ''){
+                Session::put('checkpoint', 1);
+                return view('order.order1-datauser');
+            }else{
+                if($checkpoint >= 1){
+                    return view('order.order1-datauser');
+                }else{
+                    return redirect()->to('/new/order/checkpoint');
+                }
+            }
         }
     }
 
     // ORDER2-Mempelai
-    public function mempelai(){
+    public function mempelai()
+    {
+
+        if (!Session::has('plan_order') && !Session::has('tema_order')) {
+            return redirect()->to('/');
+        } else {
+
+            $checkpoint = Session('checkpoint');
+            if($checkpoint == ''){
+                Session::put('checkpoint', 1);
+                return view('order.order1-datauser');
+            }else{
+                if($checkpoint >= 1){
+                    return view('order.order1-datauser');
+                }else{
+                    return redirect()->to('/new/order/checkpoint');
+                }
+            }
+        }
+    }
 
         return view('order.order2-mempelai');
 
     }
 
     // ORDER3-ACARA
-    public function acara(){
+    public function acara()
+    {
 
         return view('order.order3-acara');
 
     }
 
     // ORDER4-CERITA
-    public function cerita(){
+    public function cerita()
+    {
 
         return view('order.order4-cerita');
 
     }
 
     // ORDER5-GALLERY
-    public function gallery(){
+    public function gallery()
+    {
 
         return view('order.order5-gallery');
 
     }
 
     // FILEUPLOAD-GALLERY
-    public function fileUpload(Request $request){
+    public function fileUpload(Request $request)
+    {
 
         $avatar = $request->file('file');
         $generate = sha1('gwdangw');
-        $path = 'test/'.$generate;
+        $path = 'test/' . $generate;
 
         // return $avatar;
 
         // folder e
-        if(!file_exists($path)){
-        	// mkdir('test/'.$generate, 0777,true);
+        if (!file_exists($path)) {
+            // mkdir('test/'.$generate, 0777,true);
             // Storage::makeDirectory('test/'.$generate);
-            File::makeDirectory('test/'.$generate);
+            File::makeDirectory('test/' . $generate);
         }
 
         //generate dan cek nama file
-        for($i=1;$i<=10;$i++){
-        	$pathName = 'test/'.$generate.'/album'.$i.'.png';
-        	if(!file_exists($pathName)){
-        		$ok = array("no"=>$i,"dummy"=>$generate);
-        		$avatar->move(public_path('test/'.$generate),'album'.$i.'.png');
-        		echo json_encode($ok);
-        		break;
-        	}
+        for ($i = 1; $i <= 10; $i++) {
+            $pathName = 'test/' . $generate . '/album' . $i . '.png';
+            if (!file_exists($pathName)) {
+                $ok = array("no" => $i, "dummy" => $generate);
+                $avatar->move(public_path('test/' . $generate), 'album' . $i . '.png');
+                echo json_encode($ok);
+                break;
+            }
         }
 
     }
 
     //DEL-GALLERY
-    public function del(Request $request){
+    public function del(Request $request)
+    {
 
         $id = $_POST['id'];
         $generate = sha1('gwdangw');
-        $file = 'test/'.$generate.'/album'.$id.'.png';
+        $file = 'test/' . $generate . '/album' . $id . '.png';
         unlink(public_path($file));
         echo json_encode("sukses");
 
     }
 
     //ORDER6-FINISH
-    public function finish(){
+    public function finish()
+    {
         return view('order.order6-finish');
     }
 
     //ORDER7-SAVE
-    public function save(){
+    public function save()
+    {
         sleep(5);
+        Session::flush();
         return view('order.order7-success');
+    }
+
+    //CHECKPOINT
+    public function checkpoint()
+    {
+        $checkpoint = Session('checkpoint');
+        switch ($checkpoint) {
+            case 1:
+                return redirect()->to('/new/order/1');
+                break;
+            case 2:
+                return redirect()->to('new/order/2');
+                break;
+            case 3:
+                return redirect()->to('new/order/3');
+                break;
+            case 4:
+                return redirect()->to('new/order/4');
+                break;
+            case 5:
+                return redirect()->to('new/order/5');
+                break;
+        }
     }
 
     /**
