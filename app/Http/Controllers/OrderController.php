@@ -61,24 +61,6 @@ class OrderController extends Controller
     public function mempelai()
     {
 
-        if (!Session::has('plan_order') && !Session::has('tema_order')) {
-            return redirect()->to('/');
-        } else {
-
-            $checkpoint = Session('checkpoint');
-            if($checkpoint == ''){
-                Session::put('checkpoint', 1);
-                return view('order.order1-datauser');
-            }else{
-                if($checkpoint >= 1){
-                    return view('order.order1-datauser');
-                }else{
-                    return redirect()->to('/new/order/checkpoint');
-                }
-            }
-        }
-    }
-
         return view('order.order2-mempelai');
 
     }
@@ -170,19 +152,14 @@ class OrderController extends Controller
         switch ($checkpoint) {
             case 1:
                 return redirect()->to('/new/order/1');
-                break;
             case 2:
                 return redirect()->to('new/order/2');
-                break;
             case 3:
                 return redirect()->to('new/order/3');
-                break;
             case 4:
                 return redirect()->to('new/order/4');
-                break;
             case 5:
                 return redirect()->to('new/order/5');
-                break;
         }
     }
 
