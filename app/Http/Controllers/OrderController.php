@@ -4,10 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Order;
 use App\Models\Tema;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
@@ -32,6 +34,23 @@ class OrderController extends Controller
         }
     }
 
+    public function simpan_data_session($identifier)
+    {
+
+        switch ($identifier) {
+            case 'datauser':
+                $datauser = [
+                    'domain' => Request('domain'),
+                    'email' => Request('email'),
+                    'password' => Request('password'),
+                    'phone' => Request('phone')
+                ];
+                Session::put('datauser', $datauser);
+        }
+
+    }
+
+
     /**
      * Show the form for creating a new resource.
      */
@@ -39,29 +58,86 @@ class OrderController extends Controller
     // ORDER1-DATAUSER
     public function create()
     {
-        if (!Session::has('plan_order') && !Session::has('tema_order')) {
+        if (!Session::has('plan_order') || !Session::has('tema_order')) {
             return redirect()->to('/');
         } else {
-
-            $checkpoint = Session('checkpoint');
-            if($checkpoint == ''){
+            if (!Session::has('checkpoint') || Session('checkpoint') <= 1) {
                 Session::put('checkpoint', 1);
-                return view('order.order1-datauser');
-            }else{
-                if($checkpoint >= 1){
-                    return view('order.order1-datauser');
-                }else{
-                    return redirect()->to('/new/order/checkpoint');
-                }
             }
+            return view('order.order1-datauser');
         }
     }
 
     // ORDER2-Mempelai
-    public function mempelai()
+    public function mempelai(Request $r)
     {
 
-        return view('order.order2-mempelai');
+        if (!Session::has('plan_order') || !Session::has('tema_order')) {
+            return redirect()->to('/');
+        } else {
+
+            $submit = $r->submit;
+
+            if ($submit != NULL) {
+                $cekdomain = Order::where('domain', $r->domain)->count();
+                if (!$cekdomain == 0) {
+                    return redirect()->to('/new/order/1')
+                        ->with('errors', 'Domain sudah dipakai. Silahkan gunakan domain lain!')
+                        ->with('domain_old', $r->domain)
+                        ->with('email_old', $r->email)
+                        ->with('password_old', $r->password)
+                        ->with('phone_old', $r->phone);
+                    exit();
+                }
+
+                $rules = [
+                    'domain' => 'required',
+                    'email' => 'required',
+                    'password' => 'required',
+                    'phone' => 'required',
+                ];
+
+                $text = [
+                    'domain' => 'Silahkan isi domain!',
+                    'email' => 'Silahkan isi email!',
+                    'password' => 'Silahkan isi password!',
+                    'phone' => 'Silahkan isi Nomor HP/Whatsapp!',
+                ];
+
+                $validate = Validator::make($r->all(), $rules, $text);
+
+                if ($validate->fails()) {
+                    return redirect()->to('/new/order/1')
+                        ->with('errors', $validate->errors()->first())
+                        ->with('domain_old', $r->domain)
+                        ->with('email_old', $r->email)
+                        ->with('password_old', $r->password)
+                        ->with('phone_old', $r->phone);
+                    exit();
+                }
+
+                if (isset($r->submit)) {
+                    $this->simpan_data_session('datauser');
+                }
+
+                //BUAT IDENTITAS DUMMY
+                if (!Session::has('dummy')) {
+                    $dummy = sha1(Session('datauser')['domain']);
+                    Session::put('dummy', $dummy);
+                }
+
+                if (Session('checkpoint') <= 2) {
+                    Session::put('checkpoint', 2);
+                }
+            }
+
+            //CHECKPOINT
+            if(Session('checkpoint') >= 2 ){
+                return view('order.order2-mempelai');
+            }else{
+                return redirect()->to('/new/order/checkpoint');
+            }
+        }
 
     }
 
@@ -163,43 +239,4 @@ class OrderController extends Controller
         }
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Order $order)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Order $order)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Order $order)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Order $order)
-    {
-        //
-    }
 }

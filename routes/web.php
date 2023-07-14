@@ -75,10 +75,10 @@ Route::prefix('admin')->middleware('auth')->group(function () {
 // Order & Create New
 Route::get('/order/{id}', [OrderController::class, 'index']);
 Route::get('/new/order/1', [OrderController::class, 'create']);
-Route::post('/new/order/2', [OrderController::class, 'mempelai']);
-Route::post('/new/order/3', [OrderController::class, 'acara']);
-Route::post('/new/order/4', [OrderController::class, 'cerita']);
-Route::post('/new/order/5', [OrderController::class, 'gallery']);
+Route::get('/new/order/2', [OrderController::class, 'mempelai']);
+Route::get('/new/order/3', [OrderController::class, 'acara']);
+Route::get('/new/order/4', [OrderController::class, 'cerita']);
+Route::get('/new/order/5', [OrderController::class, 'gallery']);
 Route::post('/new/order/fileUpload', [OrderController::class, 'fileUpload']);
 Route::post('/new/order/del', [OrderController::class, 'del']);
 Route::post('/new/order/finish', [OrderController::class, 'finish']);
@@ -120,13 +120,17 @@ Route::get('/dd', function () {
 
 //RESET SESSION CHECKPOINT
 Route::get('/reset', function () {
-    Session::pull('checkpoint');
-    if(Session('checkpoint')  == ''){
-        return 'checkpoint empty';
+    Session::pull('datauser');
+    if(Session('datauser')  == ''){
+        return 'datauser empty';
     }else{
-        return Session('checkpoint').'fail';
+        return Session('datauser').'fail';
     }
 });
-Route::get('/checkpoint', function () {
-    return Session('checkpoint');
+Route::get('/check', function () {
+    if(Session('datauser')){
+        return Session('datauser').'ADA';
+    }else{
+        return 'KOSONG BRO';
+    }
 });

@@ -13,6 +13,10 @@
                             </div>
                         </div>
 
+                        @if (Session::has('errors'))
+                            <div class="alert alert-danger"> {{ Session('errors') }} </div>
+                        @endif
+
                         <form action="{{ url('/new/order/2') }}" method="post">
                             @csrf
                             <div class="row align-items-center">
@@ -21,8 +25,15 @@
                                     <div class="input-group ">
                                         <div class="input-group-append d-flex">
                                             <span class="input-group-text">undangan.invitationlabs.com/</span>
-                                            <input type="text" class="form-control" name="domain" placeholder="akudandia"
-                                                onkeyup="nospaces(this)">
+                                            <input type="text" class="form-control" name="domain"
+                                                placeholder="akudandia" onkeyup="nospaces(this)"
+                                                value="<?php
+                                                if (Session::has('domain_old')) {
+                                                    echo Session('domain_old');
+                                                } elseif (Session::has('datauser')) {
+                                                    echo Session('datauser')['domain'];
+                                                }
+                                                ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -31,21 +42,27 @@
                                 <div class="col">
                                     <label>Email</label>
                                     <input name="email" type="email" class="form-control" placeholder="Email"
-                                        value="" >
+                                        @if (Session::has('email_old')) value="{{ Session('email_old') }}"
+                                            @elseif (Session::has('datauser'))
+                                            value="{{ Session::has('datauser')['email'] }}" @endif>
                                 </div>
                             </div>
                             <div class="row align-items-center mt-3">
                                 <div class="col">
                                     <label>Password</label>
                                     <input name="password" type="text" class="form-control" placeholder="Password"
-                                        value="" >
+                                    @if (Session::has('password_old')) value="{{ Session('password_old') }}"
+                                    @elseif (Session::has('datauser'))
+                                    value="{{ Session::has('datauser')['password'] }}" @endif>
                                 </div>
                             </div>
                             <div class="row align-items-center mt-3">
                                 <div class="col">
                                     <label>Nomer HP / WhatsApp</label>
-                                    <input name="hp" type="number" class="form-control" placeholder="0" value=""
-                                        >
+                                    <input name="phone" type="number" class="form-control" placeholder="0"
+                                    @if (Session::has('phone_old')) value="{{ Session('phone_old') }}"
+                                    @elseif (Session::has('datauser'))
+                                    value="{{ Session::has('datauser')['phone'] }}" @endif>
                                 </div>
                             </div>
                             <div class="row justify-content-start mt-4">
@@ -68,4 +85,14 @@
             </div>
         </section>
     </div>
+@endsection
+
+@section('script')
+    <script type="text/javascript">
+        function nospaces(t) {
+            if (t.value.match(/\s/g)) {
+                t.value = t.value.replace(/\s/g, '');
+            }
+        }
+    </script>
 @endsection
