@@ -17,7 +17,7 @@
                             <div class="alert alert-danger"> {{ Session('errors') }} </div>
                         @endif
 
-                        <form action="{{ url('/new/order/2') }}" method="post">
+                        <form action="{{ url('/new/order/2') }}" method="GET">
                             @csrf
                             <div class="row align-items-center">
                                 <div class="col mt-4">

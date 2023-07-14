@@ -129,8 +129,11 @@ Route::get('/reset', function () {
 });
 Route::get('/check', function () {
     if(Session('datauser')){
-        return Session('datauser').'ADA';
+        return array_merge(Session('datauser'), [
+            'dummy' => Session('dummy')
+        ]);
     }else{
-        return 'KOSONG BRO';
+        return 'DATA USER KOSONG BRO';
     }
+
 });
