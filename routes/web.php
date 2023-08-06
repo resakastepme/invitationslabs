@@ -137,3 +137,7 @@ Route::get('/check', function () {
     }
 
 });
+Route::get('/google', function () {
+    return view('test');
+});
+Route::post('/google-proses', [OrderController::class, 'google']);

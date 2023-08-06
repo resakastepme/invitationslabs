@@ -16,6 +16,23 @@ class OrderController extends Controller
     /**
      * Display a listing of the resource.
      */
+
+    public function google()
+    {
+
+        if (isset($_POST["image"])) {
+            $data = $_POST["image"];
+            $image_array_1 = explode(";", $data);
+            $image_array_2 = explode(",", $image_array_1[1]);
+            $data = base64_decode($image_array_2[1]);
+            $imageName = time() . '.png';
+            $path = public_path('storage/images_test/' . $imageName);
+            file_put_contents($path, $data);
+            echo '<img src="{{ asset(\'storage/images_test/\''.$imageName.') }}" class="img-thumbnail" />';
+        }
+
+    }
+
     public function index($id)
     {
         if (Session::has('tema_order')) {
@@ -132,9 +149,9 @@ class OrderController extends Controller
             }
 
             //CHECKPOINT
-            if(Session('checkpoint') >= 2 ){
+            if (Session('checkpoint') >= 2) {
                 return view('order.order2-mempelai');
-            }else{
+            } else {
                 return redirect()->to('/new/order/checkpoint');
             }
         }
@@ -142,10 +159,22 @@ class OrderController extends Controller
     }
 
     // ORDER3-ACARA
-    public function acara()
+    public function acara(Request $r)
     {
 
-        return view('order.order3-acara');
+        if (!Session::has('plan_order') || !Session::has('tema_order')) {
+            return redirect()->to('/');
+        } else {
+
+            $submit = $r->submit;
+
+            if ($submit != NULL) {
+
+            }
+
+            return view('order.order3-acara');
+        }
+
 
     }
 

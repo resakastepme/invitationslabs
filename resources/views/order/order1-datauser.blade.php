@@ -44,7 +44,7 @@
                                     <input name="email" type="email" class="form-control" placeholder="Email"
                                         @if (Session::has('email_old')) value="{{ Session('email_old') }}"
                                             @elseif (Session::has('datauser'))
-                                            value="{{ Session::has('datauser')['email'] }}" @endif>
+                                            value="{{ Session('datauser')['email'] }}" @endif>
                                 </div>
                             </div>
                             <div class="row align-items-center mt-3">
@@ -53,7 +53,7 @@
                                     <input name="password" type="text" class="form-control" placeholder="Password"
                                     @if (Session::has('password_old')) value="{{ Session('password_old') }}"
                                     @elseif (Session::has('datauser'))
-                                    value="{{ Session::has('datauser')['password'] }}" @endif>
+                                    value="{{ Session('datauser')['password'] }}" @endif>
                                 </div>
                             </div>
                             <div class="row align-items-center mt-3">
@@ -62,7 +62,7 @@
                                     <input name="phone" type="number" class="form-control" placeholder="0"
                                     @if (Session::has('phone_old')) value="{{ Session('phone_old') }}"
                                     @elseif (Session::has('datauser'))
-                                    value="{{ Session::has('datauser')['phone'] }}" @endif>
+                                    value="{{ Session('datauser')['phone'] }}" @endif>
                                 </div>
                             </div>
                             <div class="row justify-content-start mt-4">

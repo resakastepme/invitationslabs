@@ -22,7 +22,7 @@
                             style="color: #2c3e50;margin-bottom:0px;font-size: 20px;font-weight: 600;display: flex;">Calon
                             Mempelai Pria</a>
 
-                        <form action="{{ url('/new/order/3') }}" method="POST">
+                        <form action="{{ url('/new/order/3') }}" method="GET">
                             @csrf
                             <div class="row d-flex align-items-center">
                                 <div class="col mt-2">
@@ -34,8 +34,7 @@
                                                 <div
                                                     class="col-12 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
                                                     <div class="upload-area" style="height: 100%;padding: 5px 5px;">
-                                                        <img src="{{ asset('base/img/groom.png') }}"
-                                                            id="profile-pic-groom"
+                                                        <img src="{{ asset('base/img/groom.png') }}" id="profile-pic-groom"
                                                             style='border-radius: 5px;height: 200px;width: 200px;'>
                                                     </div>
 
@@ -57,7 +56,7 @@
                                 <div class="col">
                                     <label>Nama Lengkap</label>
                                     <input name="nama_lengkap_pria" type="text" class="form-control"
-                                        placeholder="Contoh : Jack Dawson S.Kom" value="" >
+                                        placeholder="Contoh : Jack Dawson S.Kom" value="">
                                 </div>
                             </div>
 
@@ -65,7 +64,7 @@
                                 <div class="col">
                                     <label>Nama Panggilan</label>
                                     <input name="nama_panggilan_pria" type="text" class="form-control"
-                                        placeholder="Contoh : Jack" value="" >
+                                        placeholder="Contoh : Jack" value="">
                                 </div>
                             </div>
 
@@ -73,7 +72,7 @@
                                 <div class="col">
                                     <label>Nama Ayah</label>
                                     <input name="nama_ayah_pria" type="text" class="form-control" placeholder="Nama Ayah"
-                                        value="" >
+                                        value="">
                                 </div>
                             </div>
 
@@ -81,7 +80,7 @@
                                 <div class="col">
                                     <label>Nama Ibu</label>
                                     <input name="nama_ibu_pria" type="text" class="form-control" placeholder="Nama Ibu"
-                                        value="" >
+                                        value="">
                                 </div>
                             </div>
                             <hr>
@@ -98,8 +97,7 @@
                                                 <div
                                                     class="col-12 col-md-6 col-lg-6 d-flex align-items-center justify-content-center">
                                                     <div class="upload-area" style="height: 100%;padding: 5px 5px;">
-                                                        <img src="{{ asset('base/img/bride.png') }}"
-                                                            id="profile-pic-bride"
+                                                        <img src="{{ asset('base/img/bride.png') }}" id="profile-pic-bride"
                                                             style='border-radius: 5px;height: 200px;width: 200px;'>
                                                     </div>
                                                 </div>
@@ -120,7 +118,7 @@
                                 <div class="col">
                                     <label>Nama Lengkap</label>
                                     <input name="nama_lengkap_wanita" type="text" class="form-control"
-                                        placeholder="Contoh : Fatimah Az Zahra" value="" >
+                                        placeholder="Contoh : Fatimah Az Zahra" value="">
                                 </div>
                             </div>
 
@@ -128,7 +126,7 @@
                                 <div class="col">
                                     <label>Nama Panggilan</label>
                                     <input name="nama_panggilan_wanita" type="text" class="form-control"
-                                        placeholder="Contoh : Fatimah" value="" >
+                                        placeholder="Contoh : Fatimah" value="">
                                 </div>
                             </div>
 
@@ -136,7 +134,7 @@
                                 <div class="col">
                                     <label>Nama Ayah</label>
                                     <input name="nama_ayah_wanita" type="text" class="form-control"
-                                        placeholder="Nama Ayah" value="" >
+                                        placeholder="Nama Ayah" value="">
 
                                 </div>
                             </div>
@@ -145,7 +143,7 @@
                                 <div class="col">
                                     <label>Nama Ibu</label>
                                     <input name="nama_ibu_wanita" type="text" class="form-control"
-                                        placeholder="Nama Ibu" value="" >
+                                        placeholder="Nama Ibu" value="">
 
                                 </div>
                             </div>
@@ -200,4 +198,9 @@
             </div>
         </section>
     </div>
+@endsection
+
+@section('script')
+    <script type="text/javascript">
+    </script>
 @endsection
