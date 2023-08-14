@@ -18,7 +18,7 @@
                                 aria-valuemin="0" aria-valuemax="100">50%</div>
                         </div>
 
-                        <form method="post" action="{{ url('/new/order/5') }}">
+                        <form method="GET" action="{{ url('/new/order/5') }}">
                             @csrf
                             <div id="konten-cerita">
                                 <div id="cerita1">

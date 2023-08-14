@@ -74,7 +74,7 @@
                         <div class="form-check mt-4" style="text-align: center;">
                             <label class="form-check-label" style="display: show;">
                                 Untuk melakukan aktifasi silahkan login ke dashboard user atau menghubungi admin kami via <a
-                                    href="https://wa.me/+6289665983762/?text=<?php echo urlencode($format); ?>">Whtasapp</a> dengan
+                                    href="https://wa.me/+6289665983762/?text=<?php echo urlencode($format); ?>">Whatsapp</a> dengan
                                 menyertakan <strong>kode : {{ $kode }}</strong>.
                             </label>
                         </div>

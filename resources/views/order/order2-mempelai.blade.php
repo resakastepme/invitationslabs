@@ -198,9 +198,114 @@
             </div>
         </section>
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="theModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3> CROP & UPLOAD </h3>
+                </div>
+                <div class="modal-body">
+
+                    <div id="resizer"></div>
+                    <div id="uploaded_image"></div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="closeModal btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="crop-image btn btn-primary">Crop & Upload</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('script')
     <script type="text/javascript">
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        var fotoSiapa = '';
+        var uploadCrop = $('#resizer').croppie({
+            enableExif: true,
+            viewport: {
+                width: 200,
+                height: 200,
+                type: 'square'
+            },
+            boundary: {
+                width: 300,
+                height: 300
+            },
+            showZoomer: false,
+            enableResize: true,
+            enableOrientation: true,
+            mouseWheelZoom: 'ctrl'
+        });
+
+
+        $('.file-upload').on('change', function() {
+            fotoSiapa = $(this).attr('id');
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                uploadCrop.croppie('bind', {
+                    url: e.target.result,
+                    points: [77, 469, 280, 739]
+                }).then(function() {
+                    console.log('jQuery bind complete');
+                });
+            }
+            reader.readAsDataURL(this.files[0]);
+            $('#theModal').modal('show');
+        });
+
+
+        $('.crop-image').on('click', function(ev) {
+            uploadCrop.croppie('result', {
+                type: 'canvas',
+                size: 'viewport'
+            }).then(function(resp) {
+                $.ajax({
+                    url: "{{ url('/google-proses') }}",
+                    type: "POST",
+                    data: {
+                        "image": resp,
+                        "dummy": "{{ Session('dummy') }}",
+                        "fotoSiapa": fotoSiapa,
+                        "_token": "{{ csrf_token() }}"
+                    },
+                    success: function(data) {
+
+                        if(fotoSiapa == 'groom'){
+                            $("#profile-pic-groom").attr('src', resp);
+                        }else if(fotoSiapa == 'bride'){
+                            $("#profile-pic-bride").attr('src', resp);
+                        }else{
+                            $("#profile-pic-sampul").attr('src', resp);
+                        }
+
+                        $('.closeModal').click();
+                    },
+                    error: function() {
+                        console.log('failed = ' + resp);
+
+                        if(fotoSiapa == 'groom'){
+                            $("#profile-pic-groom").attr('src', resp);
+                        }else if(fotoSiapa == 'bride'){
+                            $("#profile-pic-bride").attr('src', resp);
+                        }else{
+                            $("#profile-pic-sampul").attr('src', resp);
+                        }
+
+                        $('.closeModal').click();
+                    }
+                });
+            });
+        });
     </script>
 @endsection

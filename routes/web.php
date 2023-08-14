@@ -127,11 +127,14 @@ Route::get('/reset', function () {
         return Session('datauser').'fail';
     }
 });
+
+//Random ae ini ma
 Route::get('/check', function () {
     if(Session('datauser')){
-        return array_merge(Session('datauser'), [
-            'dummy' => Session('dummy')
-        ]);
+        // return array_merge(Session('datauser'), [
+        //     'dummy' => Session('dummy')
+        // ]);
+        return session('datauser');
     }else{
         return 'DATA USER KOSONG BRO';
     }
@@ -141,3 +144,6 @@ Route::get('/google', function () {
     return view('test');
 });
 Route::post('/google-proses', [OrderController::class, 'google']);
+
+Route::post('/cropper', [OrderController::class, 'cropper'])->name('cropper');
+

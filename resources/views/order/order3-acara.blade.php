@@ -13,7 +13,7 @@
                             </div>
                         </div>
 
-                        <form action="{{ url('/new/order/4') }}" method="post">
+                        <form action="{{ url('/new/order/4') }}" method="GET">
                             @csrf
                             <div class="progress" style="margin-top: 10px;">
                                 <div class="progress-bar" role="progressbar" style="width: 35%;" aria-valuenow="30"

@@ -86,7 +86,7 @@
                             </div>
                         </div>
 
-                        <form method="post" action="{{ url('/new/order/finish') }}">
+                        <form method="GET" action="{{ url('/new/order/finish') }}">
                             @csrf
                             <div class="form-check mt-4">
                                 <label class="form-check-label ">

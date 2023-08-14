@@ -40,7 +40,7 @@
 
                         </div>
 
-                        <form method="post" action="{{ url('/new/order/save') }}">
+                        <form method="GET" action="{{ url('/new/order/save') }}">
                             <div class="row justify-content-start mt-3">
                                 <div class="col">
                                     <div class="row">

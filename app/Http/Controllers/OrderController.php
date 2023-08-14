@@ -17,19 +17,48 @@ class OrderController extends Controller
      * Display a listing of the resource.
      */
 
-    public function google()
+    public function google(Request $request)
+    {
+        $data = $request->image;
+        $dummy = $request->dummy;
+        $fotoSiapa = $request->fotoSiapa;
+
+        $path = public_path('storage/dummy/' . $dummy . '/');
+        if (!is_dir($path)) {
+            mkdir($path, 0777, true);
+        }
+
+
+        list($type, $data) = explode(';', $data);
+        list(, $data) = explode(',', $data);
+
+
+        $data = base64_decode($data);
+        $image_name = $fotoSiapa . '.png';
+        Storage::put('public/dummy/' . $dummy .'/'. $image_name, $data);
+
+
+        return response()->json(['success' => 'done'])->with('success', $image_name);
+    }
+
+    public function cropper(Request $request)
     {
 
-        if (isset($_POST["image"])) {
-            $data = $_POST["image"];
-            $image_array_1 = explode(";", $data);
-            $image_array_2 = explode(",", $image_array_1[1]);
-            $data = base64_decode($image_array_2[1]);
-            $imageName = time() . '.png';
-            $path = public_path('storage/images_test/' . $imageName);
-            file_put_contents($path, $data);
-            echo '<img src="{{ asset(\'storage/images_test/\''.$imageName.') }}" class="img-thumbnail" />';
-        }
+        $path = public_path('storage/images_test/');
+        !is_dir($path) &&
+            mkdir($path, 0777, true);
+
+        $image_parts = explode(";base64,", $request->image);
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_type = $image_type_aux[1];
+        $image_base64 = base64_decode($image_parts[1]);
+        $image_name = uniqid() . '.png';
+        $image_full_path = $path . $image_name;
+        file_put_contents($image_full_path, $image_base64);
+
+        return response()->json([
+            'success' => 'Image Uploaded Successfully'
+        ]);
 
     }
 
