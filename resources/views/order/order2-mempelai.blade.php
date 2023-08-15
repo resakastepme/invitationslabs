@@ -56,7 +56,7 @@
                                 <div class="col">
                                     <label>Nama Lengkap</label>
                                     <input name="nama_lengkap_pria" type="text" class="form-control"
-                                        placeholder="Contoh : Jack Dawson S.Kom" value="">
+                                        placeholder="Contoh : Jack Dawson S.Kom" value="{{ old('nama_lengkap_pria') }}">
                                 </div>
                             </div>
 
@@ -64,7 +64,7 @@
                                 <div class="col">
                                     <label>Nama Panggilan</label>
                                     <input name="nama_panggilan_pria" type="text" class="form-control"
-                                        placeholder="Contoh : Jack" value="">
+                                        placeholder="Contoh : Jack" value="{{ old('nama_panggilan_pria') }}">
                                 </div>
                             </div>
 
@@ -72,7 +72,7 @@
                                 <div class="col">
                                     <label>Nama Ayah</label>
                                     <input name="nama_ayah_pria" type="text" class="form-control" placeholder="Nama Ayah"
-                                        value="">
+                                        value="{{ old('nama_ayah_pria') }}">
                                 </div>
                             </div>
 
@@ -80,7 +80,7 @@
                                 <div class="col">
                                     <label>Nama Ibu</label>
                                     <input name="nama_ibu_pria" type="text" class="form-control" placeholder="Nama Ibu"
-                                        value="">
+                                        value="{{ old('nama_ibu_pria') }}">
                                 </div>
                             </div>
                             <hr>
@@ -118,7 +118,7 @@
                                 <div class="col">
                                     <label>Nama Lengkap</label>
                                     <input name="nama_lengkap_wanita" type="text" class="form-control"
-                                        placeholder="Contoh : Fatimah Az Zahra" value="">
+                                        placeholder="Contoh : Fatimah Az Zahra" value="{{ old('nama_lengkap_wanita') }}">
                                 </div>
                             </div>
 
@@ -126,7 +126,7 @@
                                 <div class="col">
                                     <label>Nama Panggilan</label>
                                     <input name="nama_panggilan_wanita" type="text" class="form-control"
-                                        placeholder="Contoh : Fatimah" value="">
+                                        placeholder="Contoh : Fatimah" value="{{ old('nama_panggilan_wanita') }}">
                                 </div>
                             </div>
 
@@ -134,7 +134,7 @@
                                 <div class="col">
                                     <label>Nama Ayah</label>
                                     <input name="nama_ayah_wanita" type="text" class="form-control"
-                                        placeholder="Nama Ayah" value="">
+                                        placeholder="Nama Ayah" value="{{ old('nama_ayah_wanita') }}">
 
                                 </div>
                             </div>
@@ -143,7 +143,7 @@
                                 <div class="col">
                                     <label>Nama Ibu</label>
                                     <input name="nama_ibu_wanita" type="text" class="form-control"
-                                        placeholder="Nama Ibu" value="">
+                                        placeholder="Nama Ibu" value="{{ old('nama_ibu_wanita') }}">
 
                                 </div>
                             </div>
@@ -224,6 +224,27 @@
 
 @section('script')
     <script type="text/javascript">
+        $(document).ready(function() {
+
+            toastr.options.positionClass = 'toast-top-right';
+            toastr.options.progressBar = true;
+            toastr.options.timeOut = 15000;
+            toastr.options.extendedTimeOut = 3000;
+
+            const fail = "{{ Session('fail') }}";
+            const id = "{{ Session('id') }}";
+            if (id != NULL) {
+                const findInput = document.getEelementsByName(id);
+                if (findInput) {
+                    findInput.autofocus = true;
+                    toastr.warning(fail, 'INVITATION LABS', {
+                        timeOut: 15000
+                    });
+                }
+            }
+
+        });
+
         $.ajaxSetup({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -281,11 +302,11 @@
                     },
                     success: function(data) {
 
-                        if(fotoSiapa == 'groom'){
+                        if (fotoSiapa == 'groom') {
                             $("#profile-pic-groom").attr('src', resp);
-                        }else if(fotoSiapa == 'bride'){
+                        } else if (fotoSiapa == 'bride') {
                             $("#profile-pic-bride").attr('src', resp);
-                        }else{
+                        } else {
                             $("#profile-pic-sampul").attr('src', resp);
                         }
 
@@ -294,11 +315,11 @@
                     error: function() {
                         console.log('failed = ' + resp);
 
-                        if(fotoSiapa == 'groom'){
+                        if (fotoSiapa == 'groom') {
                             $("#profile-pic-groom").attr('src', resp);
-                        }else if(fotoSiapa == 'bride'){
+                        } else if (fotoSiapa == 'bride') {
                             $("#profile-pic-bride").attr('src', resp);
-                        }else{
+                        } else {
                             $("#profile-pic-sampul").attr('src', resp);
                         }
 

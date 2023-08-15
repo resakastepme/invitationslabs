@@ -25,6 +25,8 @@
     <link rel="stylesheet" href="{{ asset('base/css/croppie.min.css') }}" type="text/css" />
     {{-- drozone --}}
     <link rel="stylesheet" href="{{ asset('plugins/dropzone/min/dropzone.min.css') }}" type="text/css" />
+    {{-- Toastr --}}
+    <link rel="stylesheet" href="{{ asset('base/css/toastr.min.css') }}" type="text/css">
 
 </head>
 
@@ -97,6 +99,8 @@
     <script src="{{ asset('base/js/croppie.min.js') }}"></script>
     <!-- Own Fontawesome -->
     <script src="{{ asset('plugins/fontawesome-free/d639410787.js') }}" crossorigin="anonymous"></script>
+    {{-- Toastr --}}
+    <script src="{{ asset('base/js/toastr.min.js') }}"></script>
 
     @yield('script')
 

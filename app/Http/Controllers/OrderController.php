@@ -35,7 +35,7 @@ class OrderController extends Controller
 
         $data = base64_decode($data);
         $image_name = $fotoSiapa . '.png';
-        Storage::put('public/dummy/' . $dummy .'/'. $image_name, $data);
+        Storage::put('public/dummy/' . $dummy . '/' . $image_name, $data);
 
 
         return response()->json(['success' => 'done'])->with('success', $image_name);
@@ -88,10 +88,23 @@ class OrderController extends Controller
                 $datauser = [
                     'domain' => Request('domain'),
                     'email' => Request('email'),
-                    'password' => Request('password'),
+                    'password' => bcrypt(Request('password')),
                     'phone' => Request('phone')
                 ];
                 Session::put('datauser', $datauser);
+
+            case 'mempelai':
+                $datamempelai = [
+                    'nama_lengkap_pria' => Request('nama_lengkap_pria'),
+                    'nama_panggilan_pria' => Request('nama_panggilan_pria'),
+                    'nama_ayah_pria' => Request('nama_ayah_pria'),
+                    'nama_ibu_pria' => Request('nama_ibu_pria'),
+                    'nama_lengkap_wanita' => Request('nama_lengkap_wanita'),
+                    'nama_panggilan_wanita' => Request('nama_panggilan_wanita'),
+                    'nama_ayah_wanita' => Request('nama_ayah_wanita'),
+                    'nama_ibu_wanita' => Request('nama_ibu_wanita')
+                ];
+                Session::put('datamempelai', $datamempelai);
         }
 
     }
@@ -199,9 +212,49 @@ class OrderController extends Controller
 
             if ($submit != NULL) {
 
-            }
+                $rules = [
+                    'nama_lengkap_pria' => 'required',
+                    'nama_panggilan_pria' => 'required',
+                    'nama_ayah_pria' => 'required',
+                    'nama_ibu_pria' => 'required',
+                    'nama_lengkap_wanita' => 'required',
+                    'nama_panggilan_wanita' => 'required',
+                    'nama_ayah_wanita' => 'required',
+                    'nama_ibu_wanita' => 'required'
+                ];
+                $text = [
+                    'nama_lengkap_pria' => 'Mohon lengkapi form nya!',
+                    'nama_panggilan_pria' => 'Mohon lengkapi form nya!',
+                    'nama_ayah_pria' => 'Mohon lengkapi form nya!',
+                    'nama_ibu_pria' => 'Mohon lengkapi form nya!',
+                    'nama_lengkap_wanita' => 'Mohon lengkapi form nya!',
+                    'nama_panggilan_wanita' => 'Mohon lengkapi form nya!',
+                    'nama_ayah_wanita' => 'Mohon lengkapi form nya!',
+                    'nama_ibu_wanita' => 'Mohon lengkapi form nya!'
+                ];
+                $validate = Validator::make($r->all(), $rules, $text);
+                if ($validate->fails()) {
 
-            return view('order.order3-acara');
+                    return back()
+                            ->with('fail', $validate->errors()->first())
+                            ->with('id', $validate->attributes()[0]);
+                    exit();
+
+                }
+                if (isset($r->submit)) {
+                    $this->simpan_data_session('mempelai');
+                }
+                if (Session('checkpoint') <= 3) {
+                    Session::put('checkpoint', 3);
+                }
+                //CHECKPOINT
+                if (Session('checkpoint') >= 3) {
+                    return view('order.order3-acara');
+                } else {
+                    return redirect()->to('/new/order/checkpoint');
+                }
+
+            }
         }
 
 

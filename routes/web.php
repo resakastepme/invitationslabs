@@ -134,7 +134,7 @@ Route::get('/check', function () {
         // return array_merge(Session('datauser'), [
         //     'dummy' => Session('dummy')
         // ]);
-        return session('datauser');
+        return session('datamempelai');
     }else{
         return 'DATA USER KOSONG BRO';
     }
